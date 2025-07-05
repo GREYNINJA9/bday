@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday!</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Pacifico&family=Dancing+Script:wght@700&display=swap');
         
         body {
             margin: 0;
@@ -126,9 +126,9 @@
         }
         
         .gift-box {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(to right, #ff4e50, #f9d423);
+            width: 220px;
+            height: 220px;
+            background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
             margin: 2rem auto;
             position: relative;
             cursor: pointer;
@@ -149,9 +149,9 @@
         }
         
         .gift-lid {
-            width: 200px;
+            width: 220px;
             height: 30px;
-            background: linear-gradient(to right, #ff4e50, #f9d423);
+            background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
             position: absolute;
             top: -30px;
             left: 0;
@@ -163,13 +163,15 @@
             font-weight: bold;
             color: white;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
         }
         
         .gift-bow {
-            width: 200px;
+            width: 220px;
             height: 30px;
             position: absolute;
-            top: 85px;
+            top: 95px;
             left: 0;
             transform: translateZ(10px);
             display: flex;
@@ -177,6 +179,7 @@
             align-items: center;
             font-weight: bold;
             color: white;
+            opacity: 0.7;
         }
         
         .gift-bow:before, .gift-bow:after {
@@ -184,37 +187,44 @@
             position: absolute;
             width: 30px;
             height: 30px;
-            background: #ff1493;
+            background: rgba(255, 20, 147, 0.6);
             border-radius: 50%;
         }
         
         .gift-bow:before {
-            left: 35px;
+            left: 45px;
         }
         
         .gift-bow:after {
-            right: 35px;
+            right: 45px;
         }
         
         .gift-center {
             width: 30px;
             height: 30px;
-            background: #ff1493;
+            background: rgba(255, 20, 147, 0.6);
             position: absolute;
             top: 0;
-            left: 85px;
+            left: 95px;
             transform: rotate(45deg);
         }
         
-        .hidden {
-            display: none;
+        .gift-message {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            margin-top: 10px;
+            font-family: 'Dancing Script', cursive;
+            z-index: 2;
+            position: relative;
+            padding: 0 10px;
         }
         
         .photo-container {
-            perspective: 1000px;
             margin: 2rem auto;
             width: 300px;
             height: 300px;
+            perspective: 1000px;
         }
         
         .photo-frame {
@@ -247,8 +257,23 @@
             background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
+        }
+        
+        .photo-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .click-instruction {
+            position: absolute;
+            bottom: 10px;
+            background: rgba(0,0,0,0.5);
             color: white;
-            font-size: 1.5rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
         
         .photo-back {
@@ -264,19 +289,21 @@
         .photo-back h3 {
             color: #ff1493;
             margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
         }
         
         .photo-back p {
             margin: 0.5rem 0;
             line-height: 1.5;
+            font-size: 1.1rem;
         }
         
-        .stars {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 100;
+        .special-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #ff5e62;
+            margin-top: 1rem;
         }
         
         @keyframes bounce {
@@ -293,24 +320,6 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        .music-note {
-            position: absolute;
-            font-size: 24px;
-            opacity: 0;
-            animation: float-up 3s forwards;
-            pointer-events: none;
-        }
-        
-        @keyframes float-up {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100px); opacity: 0; }
         }
         
         .wish-message {
@@ -332,25 +341,21 @@
             transform: translate(-50%, -50%) scale(1);
         }
         
-        .gift-message {
-            font-size: 1.2rem;
+        .wish-message h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff1493;
+            font-size: 2rem;
+        }
+        
+        #closeWish {
+            background: linear-gradient(to right, #ff5e62, #ff9966);
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            margin-top: 10px;
-        }
-        
-        .gift-image {
-            max-width: 150px;
-            max-height: 150px;
-            margin-top: 10px;
-            border-radius: 5px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        
-        .click-instruction {
-            margin-top: 10px;
-            font-style: italic;
-            color: #666;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-family: 'Baloo 2', cursive;
         }
     </style>
 </head>
@@ -384,13 +389,16 @@
         <div class="photo-container">
             <div class="photo-frame" id="photoFrame">
                 <div class="photo-front">
-                    <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo" style="max-width: 90%; max-height: 80%; border-radius: 5px;">
+                    <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo">
                     <div class="click-instruction">Click on this image</div>
                 </div>
                 <div class="photo-back">
                     <h3>Apart from jokes!</h3>
-                    <p>May your year be filled with joy, laughter, and all the happiness you bring to others!</p>
-                    <p>Wishing you endless blessings and unforgettable moments!</p>
+                    <p>May your special day be as wonderful as you are!</p>
+                    <p>Wishing you moments that sparkle with joy,</p>
+                    <p>days filled with love,</p>
+                    <p>and a year ahead that's your best yet!</p>
+                    <div class="special-message">You deserve the world and more!</div>
                 </div>
             </div>
         </div>
@@ -403,12 +411,8 @@
     </div>
     
     <audio id="birthdayMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        <!-- Note: For copyright reasons, I've used a placeholder music.
-             To use the actual "La La Land" song, you would need to:
-             1. Have the legal rights to use the song
-             2. Upload it to a service like SoundCloud
-             3. Replace the above URL with your authorized music file -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+        <!-- Happy birthday music placeholder -->
     </audio>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
@@ -424,50 +428,6 @@
         const photoFrame = document.getElementById('photoFrame');
         let candlesLit = true;
         let musicPlaying = false;
-        
-        // Create floating music notes
-        function createMusicNote(x, y) {
-            const notes = ['♪', '♫', '♩', '♬'];
-            const note = document.createElement('div');
-            note.className = 'music-note';
-            note.textContent = notes[Math.floor(Math.random() * notes.length)];
-            note.style.left = x + 'px';
-            note.style.top = y + 'px';
-            note.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            document.body.appendChild(note);
-            
-            setTimeout(() => {
-                note.remove();
-            }, 3000);
-        }
-        
-        // Create stars on click
-        document.addEventListener('click', function(e) {
-            createMusicNote(e.clientX, e.clientY);
-            
-            // Create stars
-            for (let i = 0; i < 5; i++) {
-                const star = document.createElement('div');
-                star.className = 'stars';
-                star.style.left = e.clientX + 'px';
-                star.style.top = e.clientY + 'px';
-                star.style.width = Math.random() * 20 + 5 + 'px';
-                star.style.height = star.style.width;
-                star.style.animation = `float ${Math.random() * 2 + 1}s linear forwards`;
-                star.style.transform = `rotate(${Math.random() * 360}deg)`;
-                document.body.appendChild(star);
-                
-                setTimeout(() => {
-                    star.remove();
-                }, 3000);
-            }
-            
-            // Toggle music on any click
-            if (!musicPlaying) {
-                birthdayMusic.play();
-                musicPlaying = true;
-            }
-        });
         
         // Cake click event
         cake.addEventListener('click', function() {
@@ -523,8 +483,10 @@
             
             setTimeout(() => {
                 this.innerHTML = `
-                    <div class="gift-message">Your Special Gift!</div>
-                    <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" class="gift-image">
+                    <div style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                        <div class="gift-message" style="font-size:1.5rem;">Your Special Gift!</div>
+                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="max-width:90%;max-height:70%;border-radius:5px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+                    </div>
                 `;
                 this.style.transform = 'scale(1) rotateY(0)';
                 
@@ -553,8 +515,14 @@
         // Auto-start music on first interaction
         document.body.addEventListener('click', function() {
             if (!musicPlaying) {
-                birthdayMusic.play();
-                musicPlaying = true;
+                birthdayMusic.play()
+                    .then(() => {
+                        musicPlaying = true;
+                    })
+                    .catch(error => {
+                        console.log("Auto-play was prevented: ", error);
+                        // Show play button or instructions
+                    });
             }
         }, { once: true });
     </script>
