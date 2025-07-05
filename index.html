@@ -127,9 +127,10 @@
         
         .gift-container {
             width: 452px;
-            height: 679px;
+            max-width: 90%;
             margin: 2rem auto;
             position: relative;
+            height: 679px;
         }
         
         .gift-box {
@@ -141,18 +142,17 @@
             border-radius: 5px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
-            transform-style: preserve-3d;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            text-align: center;
-            overflow: hidden;
         }
         
-        .gift-box:hover {
-            transform: scale(1.02) rotateY(15deg);
+        .gift-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         
         .gift-lid {
@@ -163,7 +163,6 @@
             top: -50px;
             left: 0;
             border-radius: 5px 5px 0 0;
-            transform: translateZ(5px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -172,50 +171,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
-            z-index: 2;
-        }
-        
-        .gift-bow {
-            width: 100%;
-            height: 50px;
-            position: absolute;
-            top: 300px;
-            left: 0;
-            transform: translateZ(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: white;
-            opacity: 0.6;
-            z-index: 1;
-        }
-        
-        .gift-bow:before, .gift-bow:after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 20, 147, 0.5);
-            border-radius: 50%;
-        }
-        
-        .gift-bow:before {
-            left: 100px;
-        }
-        
-        .gift-bow:after {
-            right: 100px;
-        }
-        
-        .gift-center {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 20, 147, 0.5);
-            position: absolute;
-            top: 0;
-            left: 201px;
-            transform: rotate(45deg);
         }
         
         .gift-message {
@@ -227,53 +182,31 @@
             z-index: 2;
             position: relative;
             padding: 0 20px;
+            text-align: center;
         }
         
         .photo-container {
-            margin: 2rem auto;
             width: 606px;
+            max-width: 90%;
+            margin: 2rem auto;
+            position: relative;
             height: 1280px;
-            perspective: 1000px;
         }
         
         .photo-frame {
             width: 100%;
             height: 100%;
             position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
             cursor: pointer;
-        }
-        
-        .photo-frame.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .photo-front, .photo-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
+            overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
         }
         
-        .photo-front {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            position: relative;
-        }
-        
-        .photo-front img {
+        .photo-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
         
         .click-instruction {
@@ -287,52 +220,6 @@
             border-radius: 20px;
             font-size: 1.2rem;
             z-index: 2;
-        }
-        
-        .photo-back {
-            background: white;
-            transform: rotateY(180deg);
-            padding: 40px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .photo-back h3 {
-            color: #ff1493;
-            margin-bottom: 2rem;
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-        }
-        
-        .photo-back p {
-            margin: 1rem 0;
-            line-height: 1.8;
-            font-size: 1.5rem;
-        }
-        
-        .special-message {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            color: #ff5e62;
-            margin-top: 2rem;
-        }
-        
-        @keyframes bounce {
-            0% { transform: translateY(0) rotate(-5deg); }
-            100% { transform: translateY(-20px) rotate(-5deg); }
-        }
-        
-        @keyframes flicker {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .wish-message {
@@ -354,24 +241,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
         
-        .wish-message h2 {
-            font-family: 'Dancing Script', cursive;
-            color: #ff1493;
-            font-size: 2.5rem;
-        }
-        
-        #closeWish {
-            background: linear-gradient(to right, #ff5e62, #ff9966);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            font-family: 'Baloo 2', cursive;
-            font-size: 1.2rem;
-        }
-        
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -384,17 +253,14 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         
-        .youtube-player {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 250px;
-            background: white;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: none;
+        @keyframes bounce {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-20px) rotate(-5deg); }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
     </style>
 </head>
@@ -419,28 +285,16 @@
         
         <div class="gift-container">
             <div class="gift-box" id="giftBox">
+                <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image">
                 <div class="gift-lid">Surprise Box</div>
-                <div class="gift-bow">
-                    <div class="gift-center"></div>
-                </div>
                 <div class="gift-message">Your final birthday gift awaits!</div>
             </div>
         </div>
         
         <div class="photo-container">
             <div class="photo-frame" id="photoFrame">
-                <div class="photo-front">
-                    <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo">
-                    <div class="click-instruction">Click on this image</div>
-                </div>
-                <div class="photo-back">
-                    <h3>Apart from jokes!</h3>
-                    <p>May your special day be as wonderful as you are!</p>
-                    <p>Wishing you moments that sparkle with joy,</p>
-                    <p>days filled with love,</p>
-                    <p>and a year ahead that's your best yet!</p>
-                    <div class="special-message">You deserve the world and more!</div>
-                </div>
+                <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo" class="photo-image">
+                <div class="click-instruction">Click on this image</div>
             </div>
         </div>
     </div>
@@ -451,14 +305,15 @@
         <button id="closeWish">🎉 Thank You! 🎉</button>
     </div>
     
-    <div class="music-control" id="musicControl">🎵</div>
-    <div class="youtube-player" id="youtubePlayer">
-        <iframe width="100%" height="150" src="https://www.youtube.com/embed/57jZJ2QpKRg?autoplay=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+    <audio id="birthdayMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="music-control" id="musicControl">🔇</div>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Cake interaction
+        // Elements
         const cake = document.getElementById('cake');
         const flame = document.getElementById('flame');
         const instruction = document.querySelector('.instruction');
@@ -467,79 +322,66 @@
         const giftBox = document.getElementById('giftBox');
         const photoFrame = document.getElementById('photoFrame');
         const musicControl = document.getElementById('musicControl');
-        const youtubePlayer = document.getElementById('youtubePlayer');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+        
+        // States
         let candlesLit = true;
         let musicPlaying = false;
-        let player;
-        
-        // Load YouTube API
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtubePlayer', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-        
-        function onPlayerReady(event) {
-            // Music will start on first user interaction
-        }
-        
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                musicControl.textContent = '🔊';
-                musicPlaying = true;
-            } else if (event.data == YT.PlayerState.PAUSED) {
-                musicControl.textContent = '🔇';
-                musicPlaying = false;
-            }
-        }
         
         // Music control
         musicControl.addEventListener('click', function() {
             if (musicPlaying) {
-                player.pauseVideo();
+                birthdayMusic.pause();
+                musicControl.textContent = '🔇';
+                musicPlaying = false;
             } else {
-                player.playVideo();
+                birthdayMusic.play()
+                    .then(() => {
+                        musicControl.textContent = '🔊';
+                        musicPlaying = true;
+                    })
+                    .catch(error => {
+                        alert("Please allow audio to play for music");
+                    });
             }
         });
         
-        // Start music on first interaction
+        // Auto-start music on first interaction
         function startMusic() {
             if (!musicPlaying) {
-                player.playVideo();
-                youtubePlayer.style.display = 'block';
+                birthdayMusic.play()
+                    .then(() => {
+                        musicControl.textContent = '🔊';
+                        musicPlaying = true;
+                    })
+                    .catch(error => {
+                        musicControl.style.display = 'block';
+                    });
             }
         }
         
-        // Enable music on ANY first click
         document.addEventListener('click', function() {
             startMusic();
             document.removeEventListener('click', arguments.callee);
         }, { once: true });
         
-        // Cake click event
+        // Cake interaction
         cake.addEventListener('click', function() {
             if (candlesLit) {
-                // Blow out candles
                 flame.style.display = 'none';
                 instruction.textContent = 'Make a wish! Click again to relight!';
                 candlesLit = false;
                 
-                // Show wish message
                 setTimeout(() => {
                     wishMessage.classList.add('show');
                 }, 1000);
                 
-                // Big confetti burst
                 confetti({
                     particleCount: 200,
                     spread: 90,
                     origin: { y: 0.6 }
                 });
                 
-                // Multiple smaller bursts
                 setTimeout(() => {
                     for (let i = 0; i < 5; i++) {
                         setTimeout(() => {
@@ -553,7 +395,6 @@
                     }
                 }, 500);
             } else {
-                // Relight candles
                 flame.style.display = 'block';
                 instruction.textContent = 'Click on the cake to blow out the candles!';
                 candlesLit = true;
@@ -568,18 +409,14 @@
         
         // Gift box interaction
         giftBox.addEventListener('click', function() {
-            this.style.transform = 'scale(1.02) rotateY(180deg)';
             this.querySelector('.gift-lid').style.top = '-50px';
+            this.querySelector('.gift-message').style.display = 'none';
             
             setTimeout(() => {
                 this.innerHTML = `
-                    <div style="width:100%;height:100%;">
-                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="width:100%;height:100%;object-fit:cover;">
-                    </div>
+                    <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image" style="width:100%;height:100%;object-fit:contain;">
                 `;
-                this.style.transform = 'scale(1) rotateY(0)';
                 
-                // Gift confetti
                 confetti({
                     particleCount: 100,
                     spread: 70,
@@ -589,23 +426,12 @@
             }, 500);
         });
         
-        // Photo frame flip effect
-        photoFrame.addEventListener('click', function() {
-            this.classList.toggle('flipped');
-        });
-        
         // Background animation
         let hue = 0;
         setInterval(() => {
             hue = (hue + 0.5) % 360;
-            document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%) 0%, hsl(${(hue + 60) % 360}, 100%, 85%) 100%)`;
+            document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%) 0%, hsl(${(hue + 60) % 360}, 100%, 85%) 100%`;
         }, 50);
-        
-        // Load YouTube API
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 </body>
 </html>
