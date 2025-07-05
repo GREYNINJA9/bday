@@ -125,11 +125,17 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
-        .gift-box {
-            width: 220px;
-            height: 220px;
-            background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
+        .gift-container {
+            width: 452px;
+            height: 679px;
             margin: 2rem auto;
+            position: relative;
+        }
+        
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
             position: relative;
             cursor: pointer;
             border-radius: 5px;
@@ -142,18 +148,19 @@
             align-items: center;
             padding: 20px;
             text-align: center;
+            overflow: hidden;
         }
         
         .gift-box:hover {
-            transform: scale(1.1) rotateY(15deg);
+            transform: scale(1.02) rotateY(15deg);
         }
         
         .gift-lid {
-            width: 220px;
-            height: 30px;
+            width: 100%;
+            height: 50px;
             background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
             position: absolute;
-            top: -30px;
+            top: -50px;
             left: 0;
             border-radius: 5px 5px 0 0;
             transform: translateZ(5px);
@@ -164,14 +171,15 @@
             color: white;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
+            font-size: 2rem;
+            z-index: 2;
         }
         
         .gift-bow {
-            width: 220px;
-            height: 30px;
+            width: 100%;
+            height: 50px;
             position: absolute;
-            top: 95px;
+            top: 300px;
             left: 0;
             transform: translateZ(10px);
             display: flex;
@@ -179,51 +187,52 @@
             align-items: center;
             font-weight: bold;
             color: white;
-            opacity: 0.7;
+            opacity: 0.6;
+            z-index: 1;
         }
         
         .gift-bow:before, .gift-bow:after {
             content: '';
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 20, 147, 0.6);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 20, 147, 0.5);
             border-radius: 50%;
         }
         
         .gift-bow:before {
-            left: 45px;
+            left: 100px;
         }
         
         .gift-bow:after {
-            right: 45px;
+            right: 100px;
         }
         
         .gift-center {
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 20, 147, 0.6);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 20, 147, 0.5);
             position: absolute;
             top: 0;
-            left: 95px;
+            left: 201px;
             transform: rotate(45deg);
         }
         
         .gift-message {
-            font-size: 1.3rem;
+            font-size: 1.8rem;
             color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
             margin-top: 10px;
             font-family: 'Dancing Script', cursive;
             z-index: 2;
             position: relative;
-            padding: 0 10px;
+            padding: 0 20px;
         }
         
         .photo-container {
             margin: 2rem auto;
-            width: 300px;
-            height: 300px;
+            width: 606px;
+            height: 1280px;
             perspective: 1000px;
         }
         
@@ -251,35 +260,39 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
         
         .photo-front {
             background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
+            position: relative;
         }
         
         .photo-front img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 10px;
         }
         
         .click-instruction {
             position: absolute;
-            bottom: 10px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(0,0,0,0.5);
             color: white;
-            padding: 5px 10px;
+            padding: 10px 20px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
+            z-index: 2;
         }
         
         .photo-back {
             background: white;
             transform: rotateY(180deg);
-            padding: 20px;
+            padding: 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -288,22 +301,22 @@
         
         .photo-back h3 {
             color: #ff1493;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 3rem;
         }
         
         .photo-back p {
-            margin: 0.5rem 0;
-            line-height: 1.5;
-            font-size: 1.1rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1.5rem;
         }
         
         .special-message {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: #ff5e62;
-            margin-top: 1rem;
+            margin-top: 2rem;
         }
         
         @keyframes bounce {
@@ -344,18 +357,44 @@
         .wish-message h2 {
             font-family: 'Dancing Script', cursive;
             color: #ff1493;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
         
         #closeWish {
             background: linear-gradient(to right, #ff5e62, #ff9966);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 20px;
             cursor: pointer;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             font-family: 'Baloo 2', cursive;
+            font-size: 1.2rem;
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .youtube-player {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
@@ -378,12 +417,14 @@
             </div>
         </div>
         
-        <div class="gift-box" id="giftBox">
-            <div class="gift-lid">Surprise Box</div>
-            <div class="gift-bow">
-                <div class="gift-center"></div>
+        <div class="gift-container">
+            <div class="gift-box" id="giftBox">
+                <div class="gift-lid">Surprise Box</div>
+                <div class="gift-bow">
+                    <div class="gift-center"></div>
+                </div>
+                <div class="gift-message">Your final birthday gift awaits!</div>
             </div>
-            <div class="gift-message">Your final birthday gift awaits!</div>
         </div>
         
         <div class="photo-container">
@@ -410,10 +451,10 @@
         <button id="closeWish">🎉 Thank You! 🎉</button>
     </div>
     
-    <audio id="birthdayMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
-        <!-- Happy birthday music placeholder -->
-    </audio>
+    <div class="music-control" id="musicControl">🎵</div>
+    <div class="youtube-player" id="youtubePlayer">
+        <iframe width="100%" height="150" src="https://www.youtube.com/embed/57jZJ2QpKRg?autoplay=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
@@ -423,11 +464,60 @@
         const instruction = document.querySelector('.instruction');
         const wishMessage = document.getElementById('wishMessage');
         const closeWish = document.getElementById('closeWish');
-        const birthdayMusic = document.getElementById('birthdayMusic');
         const giftBox = document.getElementById('giftBox');
         const photoFrame = document.getElementById('photoFrame');
+        const musicControl = document.getElementById('musicControl');
+        const youtubePlayer = document.getElementById('youtubePlayer');
         let candlesLit = true;
         let musicPlaying = false;
+        let player;
+        
+        // Load YouTube API
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // Music will start on first user interaction
+        }
+        
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                musicControl.textContent = '🔊';
+                musicPlaying = true;
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                musicControl.textContent = '🔇';
+                musicPlaying = false;
+            }
+        }
+        
+        // Music control
+        musicControl.addEventListener('click', function() {
+            if (musicPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        });
+        
+        // Start music on first interaction
+        function startMusic() {
+            if (!musicPlaying) {
+                player.playVideo();
+                youtubePlayer.style.display = 'block';
+            }
+        }
+        
+        // Enable music on ANY first click
+        document.addEventListener('click', function() {
+            startMusic();
+            document.removeEventListener('click', arguments.callee);
+        }, { once: true });
         
         // Cake click event
         cake.addEventListener('click', function() {
@@ -478,14 +568,13 @@
         
         // Gift box interaction
         giftBox.addEventListener('click', function() {
-            this.style.transform = 'scale(1.2) rotateY(180deg)';
-            this.querySelector('.gift-lid').style.top = '-40px';
+            this.style.transform = 'scale(1.02) rotateY(180deg)';
+            this.querySelector('.gift-lid').style.top = '-50px';
             
             setTimeout(() => {
                 this.innerHTML = `
-                    <div style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                        <div class="gift-message" style="font-size:1.5rem;">Your Special Gift!</div>
-                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="max-width:90%;max-height:70%;border-radius:5px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+                    <div style="width:100%;height:100%;">
+                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="width:100%;height:100%;object-fit:cover;">
                     </div>
                 `;
                 this.style.transform = 'scale(1) rotateY(0)';
@@ -512,19 +601,11 @@
             document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%) 0%, hsl(${(hue + 60) % 360}, 100%, 85%) 100%)`;
         }, 50);
         
-        // Auto-start music on first interaction
-        document.body.addEventListener('click', function() {
-            if (!musicPlaying) {
-                birthdayMusic.play()
-                    .then(() => {
-                        musicPlaying = true;
-                    })
-                    .catch(error => {
-                        console.log("Auto-play was prevented: ", error);
-                        // Show play button or instructions
-                    });
-            }
-        }, { once: true });
+        // Load YouTube API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 </body>
 </html>
