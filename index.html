@@ -273,7 +273,7 @@
         .photo-front img {
             width: 100%;
             height: auto;
-            object-fit: cover;
+            object-fit: contain;
         }
         
         .click-instruction {
@@ -576,7 +576,7 @@
             setTimeout(() => {
                 this.innerHTML = `
                     <div style="width:100%;height:100%;">
-                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="width:100%;height:auto;object-fit:cover;">
+                        <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" style="width:100%;height:auto;object-fit:contain;">
                     </div>
                 `;
                 this.style.transform = 'scale(1) rotateY(0)';
