@@ -125,12 +125,15 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
+        /* Gift Box - Exact size 452x679 */
         .gift-container {
             width: 452px;
-            max-width: 90%;
+            height: 679px;
             margin: 2rem auto;
             position: relative;
-            height: 679px;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
         .gift-box {
@@ -139,20 +142,13 @@
             background: linear-gradient(to right, rgba(255, 78, 80, 0.9), rgba(249, 212, 35, 0.9));
             position: relative;
             cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         
         .gift-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .gift-lid {
@@ -162,42 +158,34 @@
             position: absolute;
             top: -50px;
             left: 0;
-            border-radius: 5px 5px 0 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
         .gift-message {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
             color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-            margin-top: 10px;
-            font-family: 'Dancing Script', cursive;
-            z-index: 2;
-            position: relative;
             padding: 0 20px;
-            text-align: center;
         }
         
+        /* Photo Frame - Exact size 606x1280 */
         .photo-container {
             width: 606px;
-            max-width: 90%;
+            height: 1280px;
             margin: 2rem auto;
             position: relative;
-            height: 1280px;
-        }
-        
-        .photo-frame {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            cursor: pointer;
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -206,7 +194,7 @@
         .photo-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
         
         .click-instruction {
@@ -219,7 +207,6 @@
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 1.2rem;
-            z-index: 2;
         }
         
         .wish-message {
@@ -283,19 +270,17 @@
             </div>
         </div>
         
-        <div class="gift-container">
-            <div class="gift-box" id="giftBox">
-                <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image">
-                <div class="gift-lid">Surprise Box</div>
-                <div class="gift-message">Your final birthday gift awaits!</div>
-            </div>
+        <!-- Gift Box - Exact size 452x679 -->
+        <div class="gift-container" id="giftBox">
+            <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image">
+            <div class="gift-lid">Surprise Box</div>
+            <div class="gift-message">Your final birthday gift awaits!</div>
         </div>
         
-        <div class="photo-container">
-            <div class="photo-frame" id="photoFrame">
-                <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo" class="photo-image">
-                <div class="click-instruction">Click on this image</div>
-            </div>
+        <!-- Photo Frame - Exact size 606x1280 -->
+        <div class="photo-container" id="photoFrame">
+            <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo" class="photo-image">
+            <div class="click-instruction">Click on this image</div>
         </div>
     </div>
     
@@ -414,7 +399,7 @@
             
             setTimeout(() => {
                 this.innerHTML = `
-                    <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image" style="width:100%;height:100%;object-fit:contain;">
+                    <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Gift" class="gift-image">
                 `;
                 
                 confetti({
