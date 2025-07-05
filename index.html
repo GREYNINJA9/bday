@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Celebration!</title>
+    <title>Happy Birthday!</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Pacifico&display=swap');
         
         body {
             margin: 0;
@@ -22,6 +22,8 @@
             position: relative;
             z-index: 1;
             padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         h1 {
@@ -31,23 +33,30 @@
             margin-bottom: 1rem;
             transform: rotate(-5deg);
             animation: bounce 2s infinite alternate;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .cake-container {
+            perspective: 1000px;
+            margin: 2rem auto;
         }
         
         .cake {
             width: 200px;
             height: 150px;
-            margin: 2rem auto;
+            margin: 0 auto;
             position: relative;
             cursor: pointer;
             transition: transform 0.3s;
+            transform-style: preserve-3d;
         }
         
         .cake:hover {
-            transform: scale(1.1);
+            transform: scale(1.05) rotateY(10deg);
         }
         
         .cake:active {
-            transform: scale(0.9);
+            transform: scale(0.95);
         }
         
         .cake-base {
@@ -59,6 +68,7 @@
             bottom: 0;
             left: 10px;
             box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+            transform: translateZ(10px);
         }
         
         .cake-top {
@@ -68,6 +78,8 @@
             border-radius: 50% 50% 0 0;
             position: absolute;
             top: 0;
+            transform: translateZ(20px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .candle {
@@ -79,6 +91,7 @@
             left: 95px;
             border-radius: 5px;
             z-index: 2;
+            transform: translateZ(30px);
         }
         
         .flame {
@@ -92,10 +105,11 @@
             box-shadow: 0 0 20px #ff6600, 0 0 40px #ffff00;
             animation: flicker 0.5s infinite alternate;
             transform-origin: center bottom;
+            z-index: 3;
         }
         
         .message {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 1.5rem;
             border-radius: 15px;
             max-width: 600px;
@@ -103,68 +117,12 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transform: rotate(1deg);
             transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
         
         .message:hover {
             transform: rotate(-1deg) scale(1.02);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-        
-        .balloon {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-            z-index: -1;
-            cursor: pointer;
-        }
-        
-        .balloon-string {
-            position: absolute;
-            width: 2px;
-            height: 100px;
-            background: #333;
-            top: 80px;
-            left: 29px;
-        }
-        
-        .button {
-            background: linear-gradient(to right, #ff5e62, #ff9966);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 1rem;
-            font-family: 'Baloo 2', cursive;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-        }
-        
-        .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        .button:active {
-            transform: translateY(0);
-        }
-        
-        @keyframes bounce {
-            0% { transform: translateY(0) rotate(-5deg); }
-            100% { transform: translateY(-20px) rotate(-5deg); }
-        }
-        
-        @keyframes flicker {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-50px) rotate(5deg); }
         }
         
         .gift-box {
@@ -177,10 +135,11 @@
             border-radius: 5px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
+            transform-style: preserve-3d;
         }
         
         .gift-box:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotateY(15deg);
         }
         
         .gift-lid {
@@ -191,6 +150,7 @@
             top: -20px;
             left: 0;
             border-radius: 5px 5px 0 0;
+            transform: translateZ(5px);
         }
         
         .gift-bow {
@@ -199,6 +159,7 @@
             position: absolute;
             top: 40px;
             left: 0;
+            transform: translateZ(10px);
         }
         
         .gift-bow:before, .gift-bow:after {
@@ -264,10 +225,65 @@
             font-weight: bold;
         }
         
+        .stars {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-20px) rotate(-5deg); }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .music-note {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            animation: float-up 3s forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        
+        .wish-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-align: center;
+            max-width: 80%;
+            transition: transform 0.5s;
+        }
+        
+        .wish-message.show {
+            transform: translate(-50%, -50%) scale(1);
         }
     </style>
 </head>
@@ -276,15 +292,17 @@
         <h1>Happy Birthday!</h1>
         
         <div class="message">
-            <p>Wishing you an amazing day filled with joy, laughter, and all your favorite things!</p>
-            <p>Click on the cake to blow out the candles!</p>
+            <p>Make a wish and blow out the candles!</p>
+            <p class="instruction">Click on the cake to blow out the candles!</p>
         </div>
         
-        <div class="cake" id="cake">
-            <div class="cake-top"></div>
-            <div class="cake-base"></div>
-            <div class="candle">
-                <div class="flame" id="flame"></div>
+        <div class="cake-container">
+            <div class="cake" id="cake">
+                <div class="cake-top"></div>
+                <div class="cake-base"></div>
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                </div>
             </div>
         </div>
         
@@ -293,162 +311,144 @@
             <div class="gift-bow">
                 <div class="gift-center"></div>
             </div>
-            <div class="gift-message hidden">Surprise! You're awesome!</div>
         </div>
         
         <div class="photo-frame">
             <div class="photo">Your Photo Here</div>
         </div>
-        
-        <button class="button" id="confettiBtn">Throw Confetti!</button>
-        <button class="button" id="balloonBtn">Release Balloons!</button>
     </div>
+    
+    <div class="wish-message" id="wishMessage">
+        <h2>Your Wish Will Come True!</h2>
+        <p>May your birthday be filled with happiness!</p>
+        <button id="closeWish">🎉 Thank You! 🎉</button>
+    </div>
+    
+    <audio id="birthdayMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Create random balloons
-        function createBalloons(count) {
-            const colors = ['#ff5e62', '#ff9966', '#4facfe', '#00f2fe', '#a18cd1', '#fbc2eb'];
-            for (let i = 0; i < count; i++) {
-                const balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                balloon.style.left = Math.random() * 100 + 'vw';
-                balloon.style.top = 100 + Math.random() * 20 + 'vh';
-                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                balloon.style.animationDuration = 5 + Math.random() * 10 + 's';
-                balloon.style.animationDelay = Math.random() * 5 + 's';
-                
-                const string = document.createElement('div');
-                string.className = 'balloon-string';
-                
-                balloon.appendChild(string);
-                document.body.appendChild(balloon);
-                
-                // Pop balloon on click
-                balloon.addEventListener('click', function() {
-                    this.style.transition = 'transform 0.2s';
-                    this.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        this.remove();
-                        confetti({
-                            particleCount: 20,
-                            spread: 70,
-                            origin: { 
-                                x: parseFloat(this.style.left) / 100, 
-                                y: parseFloat(this.style.top) / 100 
-                            },
-                            colors: [this.style.backgroundColor]
-                        });
-                    }, 200);
-                });
-            }
-        }
-        
-        // Initial balloons
-        createBalloons(10);
-        
         // Cake interaction
         const cake = document.getElementById('cake');
         const flame = document.getElementById('flame');
+        const instruction = document.querySelector('.instruction');
+        const wishMessage = document.getElementById('wishMessage');
+        const closeWish = document.getElementById('closeWish');
+        const birthdayMusic = document.getElementById('birthdayMusic');
         let candlesLit = true;
+        let musicPlaying = false;
         
+        // Create floating music notes
+        function createMusicNote(x, y) {
+            const notes = ['♪', '♫', '♩', '♬'];
+            const note = document.createElement('div');
+            note.className = 'music-note';
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.left = x + 'px';
+            note.style.top = y + 'px';
+            note.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(note);
+            
+            setTimeout(() => {
+                note.remove();
+            }, 3000);
+        }
+        
+        // Create stars on click
+        document.addEventListener('click', function(e) {
+            createMusicNote(e.clientX, e.clientY);
+            
+            // Create stars
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('div');
+                star.className = 'stars';
+                star.style.left = e.clientX + 'px';
+                star.style.top = e.clientY + 'px';
+                star.style.width = Math.random() * 20 + 5 + 'px';
+                star.style.height = star.style.width;
+                star.style.animation = `float ${Math.random() * 2 + 1}s linear forwards`;
+                star.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(star);
+                
+                setTimeout(() => {
+                    star.remove();
+                }, 3000);
+            }
+            
+            // Toggle music on any click
+            if (!musicPlaying) {
+                birthdayMusic.play();
+                musicPlaying = true;
+            }
+        });
+        
+        // Cake click event
         cake.addEventListener('click', function() {
             if (candlesLit) {
+                // Blow out candles
                 flame.style.display = 'none';
+                instruction.textContent = 'Make a wish! Click again to relight!';
+                candlesLit = false;
+                
+                // Show wish message
+                setTimeout(() => {
+                    wishMessage.classList.add('show');
+                }, 1000);
+                
+                // Big confetti burst
                 confetti({
-                    particleCount: 100,
-                    spread: 70,
+                    particleCount: 200,
+                    spread: 90,
                     origin: { y: 0.6 }
                 });
-                document.querySelector('.message p:last-child').textContent = 'Make a wish!';
-                candlesLit = false;
+                
+                // Multiple smaller bursts
+                setTimeout(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            confetti({
+                                particleCount: 50,
+                                angle: 45 + (i * 45),
+                                spread: 55,
+                                origin: { x: 0.5, y: 0.8 }
+                            });
+                        }, i * 300);
+                    }
+                }, 500);
             } else {
+                // Relight candles
                 flame.style.display = 'block';
-                document.querySelector('.message p:last-child').textContent = 'Click on the cake to blow out the candles!';
+                instruction.textContent = 'Click on the cake to blow out the candles!';
                 candlesLit = true;
+                wishMessage.classList.remove('show');
             }
+        });
+        
+        // Close wish message
+        closeWish.addEventListener('click', function() {
+            wishMessage.classList.remove('show');
         });
         
         // Gift box interaction
         const giftBox = document.getElementById('giftBox');
         giftBox.addEventListener('click', function() {
-            this.style.transform = 'scale(1.2) rotate(10deg)';
+            this.style.transform = 'scale(1.2) rotateY(180deg)';
             this.querySelector('.gift-lid').style.top = '-40px';
+            
             setTimeout(() => {
                 this.innerHTML = '<div class="gift-message">Surprise! You\'re awesome!</div>';
-                this.style.transform = 'scale(1)';
+                this.style.transform = 'scale(1) rotateY(0)';
+                
+                // Gift confetti
                 confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.6 }
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff']
                 });
             }, 500);
-        });
-        
-        // Confetti button
-        document.getElementById('confettiBtn').addEventListener('click', function() {
-            confetti({
-                particleCount: 150,
-                spread: 90,
-                origin: { y: 0.6 }
-            });
-            
-            // Create burst effect
-            setTimeout(() => {
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        confetti({
-                            particleCount: 50,
-                            angle: 45 + (i * 45),
-                            spread: 55,
-                            origin: { x: 0.5, y: 0.8 }
-                        });
-                    }, i * 300);
-                }
-            }, 300);
-        });
-        
-        // Balloon button
-        document.getElementById('balloonBtn').addEventListener('click', function() {
-            createBalloons(20);
-            
-            // Animate the button
-            this.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-        
-        // Interactive cursor effects
-        document.addEventListener('mousemove', function(e) {
-            // Create trailing stars
-            if (Math.random() > 0.7) {
-                const star = document.createElement('div');
-                star.style.position = 'absolute';
-                star.style.left = e.clientX + 'px';
-                star.style.top = e.clientY + 'px';
-                star.style.width = '10px';
-                star.style.height = '10px';
-                star.style.backgroundColor = '#fff';
-                star.style.borderRadius = '50%';
-                star.style.pointerEvents = 'none';
-                star.style.boxShadow = '0 0 10px #fff';
-                star.style.transform = 'scale(0)';
-                star.style.transition = 'transform 0.3s, opacity 0.5s';
-                
-                document.body.appendChild(star);
-                
-                setTimeout(() => {
-                    star.style.transform = 'scale(1)';
-                }, 10);
-                
-                setTimeout(() => {
-                    star.style.opacity = '0';
-                    setTimeout(() => {
-                        star.remove();
-                    }, 500);
-                }, 300);
-            }
         });
         
         // Background animation
@@ -457,6 +457,14 @@
             hue = (hue + 0.5) % 360;
             document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%) 0%, hsl(${(hue + 60) % 360}, 100%, 85%) 100%)`;
         }, 50);
+        
+        // Auto-start music on first interaction
+        document.body.addEventListener('click', function() {
+            if (!musicPlaying) {
+                birthdayMusic.play();
+                musicPlaying = true;
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
