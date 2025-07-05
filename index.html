@@ -126,8 +126,8 @@
         }
         
         .gift-box {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             background: linear-gradient(to right, #ff4e50, #f9d423);
             margin: 2rem auto;
             position: relative;
@@ -136,6 +136,12 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
             transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
         }
         
         .gift-box:hover {
@@ -143,49 +149,60 @@
         }
         
         .gift-lid {
-            width: 100px;
-            height: 20px;
+            width: 200px;
+            height: 30px;
             background: linear-gradient(to right, #ff4e50, #f9d423);
             position: absolute;
-            top: -20px;
+            top: -30px;
             left: 0;
             border-radius: 5px 5px 0 0;
             transform: translateZ(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
         .gift-bow {
-            width: 100px;
-            height: 20px;
+            width: 200px;
+            height: 30px;
             position: absolute;
-            top: 40px;
+            top: 85px;
             left: 0;
             transform: translateZ(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
         }
         
         .gift-bow:before, .gift-bow:after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             background: #ff1493;
             border-radius: 50%;
         }
         
         .gift-bow:before {
-            left: 15px;
+            left: 35px;
         }
         
         .gift-bow:after {
-            right: 15px;
+            right: 35px;
         }
         
         .gift-center {
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             background: #ff1493;
             position: absolute;
             top: 0;
-            left: 40px;
+            left: 85px;
             transform: rotate(45deg);
         }
         
@@ -193,36 +210,65 @@
             display: none;
         }
         
-        .photo-frame {
-            width: 200px;
-            height: 200px;
-            background: white;
+        .photo-container {
+            perspective: 1000px;
             margin: 2rem auto;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
+            width: 300px;
+            height: 300px;
         }
         
-        .photo-frame:hover {
-            transform: rotate(5deg) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .photo {
+        .photo-frame {
             width: 100%;
             height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+        
+        .photo-frame.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .photo-front, .photo-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .photo-front {
             background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: white;
             font-size: 1.5rem;
-            font-weight: bold;
+        }
+        
+        .photo-back {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .photo-back h3 {
+            color: #ff1493;
+            margin-bottom: 1rem;
+        }
+        
+        .photo-back p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
         }
         
         .stars {
@@ -285,6 +331,27 @@
         .wish-message.show {
             transform: translate(-50%, -50%) scale(1);
         }
+        
+        .gift-message {
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin-top: 10px;
+        }
+        
+        .gift-image {
+            max-width: 150px;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .click-instruction {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -307,14 +374,25 @@
         </div>
         
         <div class="gift-box" id="giftBox">
-            <div class="gift-lid"></div>
+            <div class="gift-lid">Surprise Box</div>
             <div class="gift-bow">
                 <div class="gift-center"></div>
             </div>
+            <div class="gift-message">Your final birthday gift awaits!</div>
         </div>
         
-        <div class="photo-frame">
-            <div class="photo">Your Photo Here</div>
+        <div class="photo-container">
+            <div class="photo-frame" id="photoFrame">
+                <div class="photo-front">
+                    <img src="https://i.ibb.co/ccNQnmHt/birthday-photo.jpg" alt="Birthday Photo" style="max-width: 90%; max-height: 80%; border-radius: 5px;">
+                    <div class="click-instruction">Click on this image</div>
+                </div>
+                <div class="photo-back">
+                    <h3>Apart from jokes!</h3>
+                    <p>May your year be filled with joy, laughter, and all the happiness you bring to others!</p>
+                    <p>Wishing you endless blessings and unforgettable moments!</p>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -326,6 +404,11 @@
     
     <audio id="birthdayMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <!-- Note: For copyright reasons, I've used a placeholder music.
+             To use the actual "La La Land" song, you would need to:
+             1. Have the legal rights to use the song
+             2. Upload it to a service like SoundCloud
+             3. Replace the above URL with your authorized music file -->
     </audio>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
@@ -337,6 +420,8 @@
         const wishMessage = document.getElementById('wishMessage');
         const closeWish = document.getElementById('closeWish');
         const birthdayMusic = document.getElementById('birthdayMusic');
+        const giftBox = document.getElementById('giftBox');
+        const photoFrame = document.getElementById('photoFrame');
         let candlesLit = true;
         let musicPlaying = false;
         
@@ -432,13 +517,15 @@
         });
         
         // Gift box interaction
-        const giftBox = document.getElementById('giftBox');
         giftBox.addEventListener('click', function() {
             this.style.transform = 'scale(1.2) rotateY(180deg)';
             this.querySelector('.gift-lid').style.top = '-40px';
             
             setTimeout(() => {
-                this.innerHTML = '<div class="gift-message">Surprise! You\'re awesome!</div>';
+                this.innerHTML = `
+                    <div class="gift-message">Your Special Gift!</div>
+                    <img src="https://i.ibb.co/MkQgsVhb/gift-image.jpg" alt="Special Gift" class="gift-image">
+                `;
                 this.style.transform = 'scale(1) rotateY(0)';
                 
                 // Gift confetti
@@ -449,6 +536,11 @@
                     colors: ['#ff0000', '#00ff00', '#0000ff']
                 });
             }, 500);
+        });
+        
+        // Photo frame flip effect
+        photoFrame.addEventListener('click', function() {
+            this.classList.toggle('flipped');
         });
         
         // Background animation
